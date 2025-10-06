@@ -5,9 +5,9 @@
   this has been updated to run a column with climate forcing for
   about 5 years, outputing every 10 days
 
-  This version of the file introduces a working version of the
-  prescribed phenology. It can be turned on and off in the EcoSIM
-  pk section of the file
+  3/25 - this version has been fixed so that the ecosim sources
+         should appear correctly in the observation files
+
 -->
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
