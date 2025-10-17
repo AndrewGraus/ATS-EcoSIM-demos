@@ -1059,12 +1059,36 @@
   </ParameterList>
 
   <ParameterList name="observations" type="ParameterList">
-    <ParameterList name="hydrology" type="ParameterList">
-      <Parameter name="observation output filename" type="string" value="fluxes.dat" />
+    <ParameterList name="surface properties" type="ParameterList">
+      <Parameter name="observation output filename" type="string" value="surf_prop.dat" />
       <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
       <ParameterList name="observed quantities" type="ParameterList">
         <ParameterList name="snow_depth" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-snow_depth" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="evapotranspiration" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-evapotranspiration" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="evaporation_ground" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-evaporation_ground" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="evaporation_snow" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-evaporation_snow" />
+          <Parameter name="region" type="string" value="surf_obs" />
+          <Parameter name="functional" type="string" value="point" />
+          <Parameter name="location name" type="string" value="cell" />
+        </ParameterList>
+        <ParameterList name="sublimation_snow" type="ParameterList">
+          <Parameter name="variable" type="string" value="surface-sublimation_snow" />
           <Parameter name="region" type="string" value="surf_obs" />
           <Parameter name="functional" type="string" value="point" />
           <Parameter name="location name" type="string" value="cell" />
@@ -1081,6 +1105,12 @@
           <Parameter name="functional" type="string" value="integral" />
           <Parameter name="location name" type="string" value="cell" />
         </ParameterList>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="subsurface properties" type="ParameterList">
+      <Parameter name="observation output filename" type="string" value="subsurf_prop.dat" />
+      <Parameter name="times start period stop" type="Array(double)" value="{ 0,86400,-1}" />
+      <ParameterList name="observed quantities" type="ParameterList">
         <ParameterList name="Q_w_subsurf" type="ParameterList">
           <Parameter name="variable" type="string" value="subsurface_ecosim_water_source" />
           <Parameter name="region" type="string" value="top_cell_obs" />
