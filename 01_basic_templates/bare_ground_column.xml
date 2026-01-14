@@ -97,53 +97,37 @@ model.
     </ParameterList>
   </ParameterList>
 
+
   <ParameterList name="cycle driver" type="ParameterList">
-    <Parameter name="start time" type="double" value="0.0"/>
-    <Parameter name="start time units" type="string" value="s"/>
-    <Parameter name="end time" type="double" value="1827.0"/>
-    <Parameter name="end time units" type="string" value="d"/>
-    <ParameterList name="PK tree" type="ParameterList">
-      <ParameterList name="top level MPC" type="ParameterList">
-        <Parameter name="PK type" type="string" value="weak MPC"/>
-        <ParameterList name="fte_seb" type="ParameterList">
-          <Parameter name="PK type" type="string" value="subcycling MPC"/>
-          <ParameterList name="flow energy balance" type="ParameterList">
-            <Parameter name="PK type" type="string" value="strong MPC"/>
-            <ParameterList name="SEB" type="ParameterList">
-              <Parameter name="PK type" type="string" value="surface balance implicit subgrid"/>
+      <Parameter name="start time" type="double" value="0.0"/>
+      <Parameter name="start time units" type="string" value="s"/>
+      <Parameter name="end time" type="double" value="1826.0"/>
+      <Parameter name="end time units" type="string" value="d"/>
+      <ParameterList name="PK tree" type="ParameterList">
+        <ParameterList name="top level MPC" type="ParameterList">
+          <Parameter name="PK type" type="string" value="weak MPC"/>
+          <ParameterList name="permafrost surface and subsurface" type="ParameterList">
+            <Parameter name="PK type" type="string" value="permafrost model"/>
+            <ParameterList name="subsurface flow" type="ParameterList">
+              <Parameter name="PK type" type="string" value="permafrost flow"/>
             </ParameterList>
-            <ParameterList name="permafrost surface and subsurface" type="ParameterList">
-              <Parameter name="PK type" type="string" value="permafrost model"/>
-              <ParameterList name="subsurface flow" type="ParameterList">
-                <Parameter name="PK type" type="string" value="permafrost flow"/>
-              </ParameterList>
-              <ParameterList name="surface flow" type="ParameterList">
-                <Parameter name="PK type" type="string" value="overland flow with ice"/>
-              </ParameterList>
-              <ParameterList name="subsurface energy" type="ParameterList">
-                <Parameter name="PK type" type="string" value="three-phase energy"/>
-              </ParameterList>
-              <ParameterList name="surface energy" type="ParameterList">
-                <Parameter name="PK type" type="string" value="surface energy"/>
-              </ParameterList>
+            <ParameterList name="surface flow" type="ParameterList">
+              <Parameter name="PK type" type="string" value="overland flow with ice"/>
+            </ParameterList>
+            <ParameterList name="subsurface energy" type="ParameterList">
+              <Parameter name="PK type" type="string" value="three-phase energy"/>
+            </ParameterList>
+            <ParameterList name="surface energy" type="ParameterList">
+              <Parameter name="PK type" type="string" value="surface energy"/>
             </ParameterList>
           </ParameterList>
-          <ParameterList name="coupled transport" type="ParameterList">
-            <Parameter name="PK type" type="string" value="surface subsurface transport"/>
-            <ParameterList name="subsurface transport" type="ParameterList">
-              <Parameter name="PK type" type="string" value="transport ATS"/>
-            </ParameterList>
-            <ParameterList name="surface transport" type="ParameterList">
-              <Parameter name="PK type" type="string" value="transport ATS"/>
-            </ParameterList>
+          <ParameterList name="EcoSIM for ATS" type="ParameterList">
+            <Parameter name="PK type" type="string" value="EcoSIM for ATS"/>
           </ParameterList>
-        </ParameterList>
-        <ParameterList name="EcoSIM for ATS" type="ParameterList">
-          <Parameter name="PK type" type="string" value="EcoSIM for ATS"/>
         </ParameterList>
       </ParameterList>
     </ParameterList>
-  </ParameterList>
+
   <ParameterList name="visualization">
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="times start period stop" type="Array(double)" value="{0.0, 864000.0, -1.0}"/>
@@ -160,14 +144,7 @@ model.
 
     <ParameterList name="top level MPC" type="ParameterList">
       <Parameter name="PK type" type="string" value="weak MPC"/>
-      <Parameter name="PKs order" type="Array(string)" value="{fte_seb, EcoSIM for ATS}"/>
-
-    </ParameterList>
-
-    <ParameterList name="fte_seb" type="ParameterList">
-      <Parameter name="PK type" type="string" value="subcycling MPC"/>
-      <Parameter name="PKs order" type="Array(string)" value="{flow energy balance, coupled transport}"/>
-      <Parameter name="subcycle" type="Array(int)" value="{0, 1}"/>
+      <Parameter name="PKs order" type="Array(string)" value="{permafrost surface and subsurface, EcoSIM for ATS}"/>
 
     </ParameterList>
 
@@ -178,19 +155,8 @@ model.
       <Parameter name="primary variable key" type="string" value="surface-ecosim_source"/>
       <Parameter name="heat capacity [MJ mol^-1 K^-1]" type="double" value="0.020"/>
       <Parameter name="initial time step" type="double" value="3600" />
-      <Parameter name="atmospheric N2" type="double" value="0.1"/>
-      <Parameter name="atmospheric O2" type="double" value="0.2"/>
-      <Parameter name="atmospheric CO2" type="double" value="0.3"/>
-      <Parameter name="atmospheric CH4" type="double" value="0.4"/>
-      <Parameter name="atmospheric N2O" type="double" value="0.5"/>
-      <Parameter name="atmospheric H2" type="double" value="0.01"/>
-      <Parameter name="atmospheric NH3" type="double" value="0.001"/>
       <Parameter name="Field Capacity [Mpa]" type="double" value="-0.033"/>
       <Parameter name="Wilting Point [Mpa]" type="double" value="-1.5"/>
-      <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.00002"/>
-      <Parameter name="van Genuchten n [-]" type="double" value="1.58"/>
-      <Parameter name="van Genuchten m [-]" type="double" value="0.3671"/>
-      <Parameter name="residual saturation [-]" type="double" value="0.2"/>
       <Parameter name="EcoSIM Precipitation" type="bool" value="false"/>
       <Parameter name="Prescribe Albedo" type="bool" value="false"/>
       <Parameter name="Prescribe Phenology" type="bool" value="false"/>
@@ -209,9 +175,26 @@ model.
 
     </ParameterList>
 
-    <ParameterList name="flow energy balance" type="ParameterList">
-      <Parameter name="PK type" type="string" value="strong MPC"/>
-      <Parameter name="PKs order" type="Array(string)" value="{SEB, permafrost surface and subsurface}"/>
+    <ParameterList name="permafrost surface and subsurface" type="ParameterList">
+      <Parameter name="PK type" type="string" value="permafrost model"/>
+      <Parameter name="PKs order" type="Array(string)" value="{subsurface flow, subsurface energy, surface flow, surface energy}"/>
+      <Parameter name="preconditioner type" type="string" value="picard"/>
+      <Parameter name="supress Jacobian terms: d div q / dT" type="bool" value="false"/>
+      <Parameter name="supress Jacobian terms: d div K grad T / dp" type="bool" value="false"/>
+      <Parameter name="supress Jacobian terms: d div hq / dp,T" type="bool" value="true"/>
+      <Parameter name="supress Jacobian terms: d div surface q / dT" type="bool" value="true"/>
+      <Parameter name="dump preconditioner" type="bool" value="false"/>
+      <ParameterList name="ewc delegate" type="ParameterList">
+        <Parameter name="predictor type" type="string" value="smart ewc"/>
+      </ParameterList>
+
+      <ParameterList name="water delegate" type="ParameterList">
+        <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true"/>
+        <Parameter name="damp and cap the water spurt" type="bool" value="true"/>
+        <Parameter name="cap over atmospheric" type="double" value="0.1"/>
+      </ParameterList>
+
+
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true"/>
         <Parameter name="solver type" type="string" value="nka_bt_ats"/>
@@ -237,53 +220,6 @@ model.
           <Parameter name="count before increasing increase factor" type="int" value="2"/>
           <Parameter name="initial timestep [s]" type="double" value="86400.0"/>
         </ParameterList>
-      </ParameterList>
-
-    </ParameterList>
-
-    <ParameterList name="SEB" type="ParameterList">
-      <Parameter name="PK type" type="string" value="surface balance implicit subgrid"/>
-      <Parameter name="domain name" type="string" value="snow"/>
-      <Parameter name="primary variable key" type="string" value="snow-depth"/>
-      <Parameter name="conserved quantity key" type="string" value="snow-water_volume"/>
-      <Parameter name="source term" type="bool" value="true"/>
-      <Parameter name="source key" type="string" value="snow-source_sink"/>
-      <ParameterList name="initial conditions" type="ParameterList">
-
-        <Parameter name="constant" type="double" value="0.35"/>
-
-      </ParameterList>
-
-      <ParameterList name="inverse" type="ParameterList">
-        <Parameter name="preconditioning method" type="string" value="identity"/>
-        <Parameter name="iterative method" type="string" value="gmres"/>
-        <ParameterList name="gmres parameters" type="ParameterList">
-          <Parameter name="preconditioning strategy" type="string" value="left"/>
-          <Parameter name="error tolerance" type="double" value="0.000001"/>
-          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual, make one iteration}"/>
-          <Parameter name="maximum number of iteration" type="int" value="80"/>
-        </ParameterList>
-      </ParameterList>
-
-    </ParameterList>
-
-    <ParameterList name="permafrost surface and subsurface" type="ParameterList">
-      <Parameter name="PK type" type="string" value="permafrost model"/>
-      <Parameter name="PKs order" type="Array(string)" value="{subsurface flow, subsurface energy, surface flow, surface energy}"/>
-      <Parameter name="preconditioner type" type="string" value="picard"/>
-      <Parameter name="supress Jacobian terms: d div q / dT" type="bool" value="false"/>
-      <Parameter name="supress Jacobian terms: d div K grad T / dp" type="bool" value="false"/>
-      <Parameter name="supress Jacobian terms: d div hq / dp,T" type="bool" value="true"/>
-      <Parameter name="supress Jacobian terms: d div surface q / dT" type="bool" value="true"/>
-      <Parameter name="dump preconditioner" type="bool" value="false"/>
-      <ParameterList name="ewc delegate" type="ParameterList">
-        <Parameter name="predictor type" type="string" value="smart ewc"/>
-      </ParameterList>
-
-      <ParameterList name="water delegate" type="ParameterList">
-        <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true"/>
-        <Parameter name="damp and cap the water spurt" type="bool" value="true"/>
-        <Parameter name="cap over atmospheric" type="double" value="0.1"/>
       </ParameterList>
 
       <ParameterList name="inverse" type="ParameterList">
@@ -443,83 +379,6 @@ model.
 
     </ParameterList>
 
-    <ParameterList name="coupled transport">
-      <Parameter name="PK type" type="string" value="surface subsurface transport"/>
-      <Parameter name="PK name" type="string" value="surface subsurface transport"/>
-      <Parameter name="PKs order" type="Array(string)" value="{subsurface transport, surface transport}"/>
-      <Parameter name="component names" type="Array(string)" value="{tracer}"/>
-
-    </ParameterList>
-
-    <ParameterList name="subsurface transport">
-      <Parameter name="PK type" type="string" value="transport ATS"/>
-      <Parameter name="previous saturation liquid key" type="string" value="prev_saturation_liquid"/>
-      <Parameter name="vol_flux conversion is required" type="bool" value="false"/>
-      <Parameter name="component names" type="Array(string)" value="{tracer}"/>
-      <Parameter name="advection spatial discretization order" type="int" value="1"/>
-      <Parameter name="temporal discretization order" type="int" value="1"/>
-      <Parameter name="cfl" type="double" value="1.0"/>
-      <Parameter name="enable internal tests" type="bool" value="false"/>
-
-      <ParameterList name="boundary conditions">
-        <!--<ParameterList name="concentration">
-          <ParameterList name="coupling">
-            <Parameter name="spatial distribution method" type="string" value="domain coupling" />
-            <Parameter name="submodel" type="string" value="field" />
-            <Parameter name="regions" type="Array(string)" value="{surface}" />
-            <ParameterList name="fields">
-              <Parameter name="field_out_key" type="string" value="surface-total_component_concentration" />
-              <Parameter name="copy_field_out_key" type="string" value="default" />
-              <Parameter name="field_in_key" type="string" value="total_component_concentration" />
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>-->
-      </ParameterList>
-
-      <ParameterList name="initial conditions" type="ParameterList">
-      </ParameterList>
-
-    </ParameterList>
-
-    <ParameterList name="surface transport">
-      <Parameter name="PK type" type="string" value="transport ATS"/>
-      <Parameter name="domain name" type="string" value="surface"/>
-      <Parameter name="saturation liquid key" type="string" value="surface-unfrozen_effective_depth"/>
-      <Parameter name="previous saturation liquid key" type="string" value="surface-prev_unfrozen_effective_depth"/>
-      <Parameter name="flux key" type="string" value="surface-mass_flux"/>
-      <Parameter name="molar_density key" type="string" value="surface-molar_density_liquid"/>
-      <Parameter name="component names" type="Array(string)" value="{tracer}"/>
-      <Parameter name="advection spatial discretization order" type="int" value="1"/>
-      <Parameter name="temporal discretization order" type="int" value="1"/>
-      <Parameter name="cfl" type="double" value="1.0"/>
-      <Parameter name="enable internal tests" type="bool" value="false"/>
-      <ParameterList name="boundary conditions" type="ParameterList">
-      </ParameterList>
-
-      <ParameterList name="initial conditions" type="ParameterList">
-      </ParameterList>
-
-      <!--<ParameterList name="source terms">
-        <ParameterList name="concentration">
-          <ParameterList name="coupling">
-            <Parameter name="regions" type="Array(string)" value="{surface domain}" />
-            <Parameter name="spatial distribution method" type="string" value="domain coupling" />
-            <Parameter name="submodel" type="string" value="rate" />
-            <ParameterList name="fields">
-              <Parameter name="flux_key" type="string" value="mass_flux" />
-              <Parameter name="copy_flux_key" type="string" value="next_timestep" />
-              <Parameter name="field_out_key" type="string" value="total_component_concentration" />
-              <Parameter name="copy_field_out_key" type="string" value="default" />
-              <Parameter name="field_in_key" type="string" value="surface-total_component_concentration" />
-              <Parameter name="copy_field_in_key" type="string" value="default" />
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-      </ParameterList>-->
-
-
-    </ParameterList>
-
   </ParameterList>
 
   <ParameterList name="state" type="ParameterList">
@@ -599,7 +458,7 @@ model.
         <Parameter name="evaluator type" type="string" value="matric pressure"/>
       </ParameterList>
       <!-- TRANSPORT -->
-      <ParameterList name="molar_density_liquid" type="ParameterList">
+      <!--<ParameterList name="molar_density_liquid" type="ParameterList">
         <Parameter name="evaluator type" type="string" value="eos"/>
         <Parameter name="EOS basis" type="string" value="both"/>
         <Parameter name="molar density key" type="string" value="molar_density_liquid"/>
@@ -637,7 +496,7 @@ model.
        <ParameterList name="surface-temperature@coupled_transport_next">
          <Parameter name="evaluator type" type="string" value="alias"/>
          <Parameter name="target" type="string" value="surface-temperature"/>
-       </ParameterList>
+       </ParameterList>-->
 
       <!--SURFACE ENERGY BALANCE-->
       <ParameterList name="surface-snow_albedo" type="ParameterList">
@@ -1133,12 +992,6 @@ model.
           <Parameter name="functional" type="string" value="integral"/>
           <Parameter name="location name" type="string" value="cell"/>
         </ParameterList>
-        <ParameterList name="Q_w" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-water_source_new"/>
-          <Parameter name="region" type="string" value="surf_obs"/>
-          <Parameter name="functional" type="string" value="integral"/>
-          <Parameter name="location name" type="string" value="cell"/>
-        </ParameterList>
         <ParameterList name="Q_e_ecosim" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-ecosim_source"/>
           <Parameter name="region" type="string" value="surf_obs"/>
@@ -1153,12 +1006,6 @@ model.
         </ParameterList>
         <ParameterList name="Q_e_ats" type="ParameterList">
           <Parameter name="variable" type="string" value="surface-total_energy_source"/>
-          <Parameter name="region" type="string" value="surf_obs"/>
-          <Parameter name="functional" type="string" value="integral"/>
-          <Parameter name="location name" type="string" value="cell"/>
-        </ParameterList>
-        <ParameterList name="Q_w_ats" type="ParameterList">
-          <Parameter name="variable" type="string" value="surface-water_source"/>
           <Parameter name="region" type="string" value="surf_obs"/>
           <Parameter name="functional" type="string" value="integral"/>
           <Parameter name="location name" type="string" value="cell"/>
