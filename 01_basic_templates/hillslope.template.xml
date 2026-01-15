@@ -120,14 +120,14 @@
       <Parameter name="engine input file" type="string" value="Null"/>
       <Parameter name="primary variable key" type="string" value="surface-ecosim_source"/>
       <Parameter name="heat capacity [MJ mol^-1 K^-1]" type="double" value="0.020"/>
-      <Parameter name="Field Capacity [Mpa]" type="double" value="-0.033"/>
-      <Parameter name="Wilting Point [Mpa]" type="double" value="-1.5"/>
+      <Parameter name="field capacity [Mpa]" type="double" value="-0.033"/>
+      <Parameter name="wilting point [Mpa]" type="double" value="-1.5"/>
       <Parameter name="initial time step" type="double" value="3600.0"/>
-      <Parameter name="EcoSIM Precipitation" type="bool" value="false"/>
-      <Parameter name="Prescribe Albedo" type="bool" value="false"/>
-      <Parameter name="Prescribe Phenology" type="bool" value="false"/>
-      <Parameter name="Starting day of year [0-364]" type="int" value="363"/>
-      <Parameter name="Starting year" type="int" value="1995"/>
+      <Parameter name="EcoSIM precipitation" type="bool" value="false"/>
+      <Parameter name="prescribe snow albedo" type="bool" value="false"/>
+      <Parameter name="prescribe phenology" type="bool" value="false"/>
+      <Parameter name="starting day of year [0-364]" type="int" value="363"/>
+      <Parameter name="starting year" type="int" value="1995"/>
       <ParameterList name="boundary conditions" type="ParameterList">
       </ParameterList>
 
